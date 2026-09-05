@@ -16,43 +16,32 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 const db = getFirestore(app);
 
-
 // 3. Your Data Array
-const heritagePlacesData = [
+const monumentsData = [
   {
-    stampName: "Standard Chartered Building",
-    stampImage: "https://github.com/vvennisss/0824-setup-mongoDB-places-table-nodejs/blob/master/stampsimages/Standard%20Chartered%20Building.jpg",
-    stampInformation: "Located in the heart of the Beach Street banking district, this imposing building was completed in 1930. Designed by the architectural firm Stark & McNeill, it features a blend of Palladian and Art Deco styles. As one of the oldest banks in Penang (the Chartered Bank of India, Australia and China first opened a branch here in 1875), it played a crucial role in financing the booming regional tin and rubber trades. Its sturdy, fortified design reflects its historical need to securely store vast amounts of physical wealth."
+    stampName: "Queen Victoria Memorial Clock Tower",
+    stampImage: "https://github.com/vvennisss/0824-setup-mongoDB-places-table-nodejs/blob/master/stampsimages/Queen%20Victoria%20Memorial%20Clock%20Tower.jpg",
+    stampInformation: "Located at the intersection of Light Street and Beach Street, the 97-foot tall Indo-Saracenic clock tower was built to commemorate the Diamond Jubilee of Queen Victoria in 1897. Financed entirely by Penang Chinese tycoon Cheah Chen Eok with a pledge of 30,000 British Trade Dollars, it was designed by Municipal Engineer Robert Peirce. The height is highly symbolic: each of its 60 feet from the base to the clock face represents a year of the Queen's reign. Although completed in 1902 after the Queen had passed away, it remains a defining George Town landmark, famously surviving WWII bombings with a slight, still-visible tilt."
   },
   {
-    stampName: "Pinang Peranakan Mansion",
-    stampImage: "https://github.com/vvennisss/0824-setup-mongoDB-places-table-nodejs/blob/master/stampsimages/Pinang%20Peranakan%20Mansion.jpg",
-    stampInformation: "Built at the end of the 19th century, this vibrant green mansion originally served as 'Hai Kee Chan' (Sea Remembrance Store), the residence and office of Chung Keng Quee, a prominent Kapitan Cina and secret society leader. Although he was not a Baba himself, his home is a masterpiece of Straits Eclectic architecture, blending Chinese carved wood panels with English ceramic tiles and Scottish ironworks. Today, it has been meticulously restored into a museum showcasing over 1,000 antiques, offering a glimpse into the opulent lifestyle of the Peranakan (Baba Nyonya) community."
+    stampName: "Logan Memorial",
+    stampImage: "https://github.com/vvennisss/0824-setup-mongoDB-places-table-nodejs/blob/master/stampsimages/Logan%20Memorial.jpg",
+    stampInformation: "Erected in 1873, the Logan Memorial honors James Richardson Logan, a Scottish lawyer who passionately championed the rights of Asians and non-Europeans in colonial Penang. Originally placed within the grounds of the Supreme Court, it now stands prominently across Light Street. The Gothic-styled monument features four allegorical female statues representing the Cardinal Virtues: Justice, Fortitude, Wisdom, and Temperance. According to local lore, it was strategically placed to remind judges and lawyers entering the High Court to always uphold the rule of law. (James Logan is also famously credited as the first person to publish the term 'Indonesia')."
   },
   {
-    stampName: "Nagore Durgha Shrine",
-    stampImage: "https://github.com/vvennisss/0824-setup-mongoDB-places-table-nodejs/blob/master/stampsimages/Nagore%20Durgha%20Shrine.jpg",
-    stampInformation: "Built in the early 1800s by the Chulia Muslim community from southern India, this shrine is dedicated to Syed Abdul Kadir Al Hasan, a revered 13th-century saint from Nagore, India. It is not a tomb, but a memorial (dargha). The building features striking Southern Indian Islamic architecture with a miniature dome and minarets. For over two centuries, it has served as an important spiritual center for the Indian Muslim diaspora, historically providing a resting place and religious focus for arriving traders and laborers."
+    stampName: "Koh Seang Tat Fountain",
+    stampImage: "https://github.com/vvennisss/0824-setup-mongoDB-places-table-nodejs/blob/master/stampsimages/Koh%20Seang%20Tat%20Fountain.jpg",
+    stampInformation: "Standing proudly at the junction of Esplanade Road and Light Street, the Municipal Fountain was donated to the Municipal Council in 1883 by Koh Seang Tat. He was a prominent Chinese millionaire, Justice of the Peace, and the grandson of Penang's first Kapitan Cina, Koh Lay Huan. The fountain was gifted in conjunction with the opening of the adjacent Town Hall. Meticulously restored to its original glory in 2011, it remains a fully functioning Victorian cast-iron fountain, serving as a beautiful testament to the philanthropic contributions of the early Chinese community toward George Town's civic infrastructure."
   },
   {
-    stampName: "Malayan Railway Building",
-    stampImage: "https://github.com/vvennisss/0824-setup-mongoDB-places-table-nodejs/blob/master/stampsimages/Malayan%20Railway%20Building.jpg",
-    stampInformation: "Built in 1907 by the Federated Malay States Railways (FMSR), this building has a famous quirk: it was a railway station that never saw a single train. Because the train tracks ended on the mainland in Butterworth, passengers would buy their tickets here, wait in the grand hall, and then board a railway ferry across the strait to catch their train. Now known as Wisma Kastam (Customs Building), its striking Edwardian Baroque architecture and prominent clock tower remain iconic waterfront landmarks."
+    stampName: "Francis Light Memorial",
+    stampImage: "https://github.com/vvennisss/0824-setup-mongoDB-places-table-nodejs/blob/master/stampsimages/Francis%20Light%20Memorial.jpg",
+    stampInformation: "Located in the tranquil grounds of St. George's Church along Farquhar Street, this Georgian and Palladian-style memorial pavilion was erected to honor Captain Francis Light, the founder of the British settlement in Penang. While it is often mistakenly claimed to have been built for the 1886 centenary, historical records (including an 1848 sketch) indicate it was actually constructed in the early 1840s by Robert Scott. Beneath its domed roof, decorated with ornamental vases, lies a marble plaque commemorating Light's death in 1794 and recognizing his pivotal role in establishing the island."
   },
   {
-    stampName: "India House",
-    stampImage: "https://github.com/vvennisss/0824-setup-mongoDB-places-table-nodejs/blob/master/stampsimages/India%20House.jpg",
-    stampInformation: "Completed in 1937, India House is a striking example of early Art Deco architecture on Beach Street. It was built by a prominent Chettiar businessman, S.N.A.S.N.M. Somasundram, to serve the Indian merchant community. During WWII, the building was notably used by the Japanese forces, and post-war it housed the United States Information Service (USIS) library. Its distinct geometric façade and historical role highlight the economic influence of the South Indian mercantile class in colonial George Town."
-  },
-  {
-    stampName: "Cheong Fatt Tze Mansion",
-    stampImage: "https://github.com/vvennisss/0824-setup-mongoDB-places-table-nodejs/blob/master/stampsimages/Cheong%20Fatt%20Tze%20Mansion.jpg",
-    stampInformation: "Famously known as 'The Blue Mansion', this 1890s architectural marvel was built by Cheong Fatt Tze, a powerful Hakka merchant and diplomat known as the 'Rockefeller of the East'. Featuring 38 rooms, 5 granite courtyards, and 7 staircases, it was built in strict accordance with Feng Shui principles. The striking indigo-blue walls are made from a traditional lime wash mixed with the blue dye of the Indigofera tinctoria plant. Rescued from ruin in the 1990s, its restoration won the inaugural UNESCO Asia-Pacific Heritage Award for Culture Heritage Conservation in 2000."
-  },
-  {
-    stampName: "Central Fire Station (Lebuh Pantai Fire Station)",
-    stampImage: "https://github.com/vvennisss/0824-setup-mongoDB-places-table-nodejs/blob/master/stampsimages/Central%20Fire%20Station%20(Lebuh%20Pantai%20Fire%20Station).jpg",
-    stampInformation: "Built in 1908 at the junction of Beach Street and Chulia Street Ghaut, this is the oldest fire station still in operation in Penang. Its classical Mughal-influenced architecture is highlighted by a distinctive four-story watchtower. Before modern communication systems, firemen would take shifts at the top of this tower, scanning the George Town skyline for smoke to spot fires early. The building stands as a testament to the city's early efforts to protect its vital, densely-packed commercial warehouses."
+    stampName: "Cenotaph War Memorial",
+    stampImage: "https://github.com/vvennisss/0824-setup-mongoDB-places-table-nodejs/blob/master/stampsimages/Cenotaph%20War%20Memorial.jpg",
+    stampInformation: "Facing the open civic space of the Esplanade seafront, the Cenotaph is a poignant war memorial originally erected in 1929 to commemorate Allied servicemen who perished in World War I. Funded through public subscriptions and unveiled on Armistice Day, the original monument was systematically dismantled by the Japanese during the WWII occupation to prevent its complete collapse after Allied bombings. In 1948, it was carefully reconstructed using the surviving original granite blocks. Today, it bears a dual legacy—honoring the fallen soldiers of two World Wars and serving as the traditional focal point for annual Remembrance Day observances."
   }
 ];
 
@@ -63,7 +52,7 @@ async function uploadStampData() {
   // Reference to the 'stamps' collection in your database
   const stampsCollectionRef = collection(db, "stamps");
 
-  for (const stamp of heritagePlacesData) {
+  for (const stamp of monumentsData) {
     try {
       // addDoc automatically generates a unique ID for each document
       const docRef = await addDoc(stampsCollectionRef, stamp);
